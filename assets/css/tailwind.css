@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #0a1024;
+    background: #f7f9fd;
+  }
+
+  /* Phone browsers give date fields a wide native control. Desktop device
+     preview does not, so the field fits there and overflows on a real phone. */
+  input[type='date'],
+  input[type='time'],
+  input[type='datetime-local'] {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    color: rgb(15 23 42);
+    color-scheme: light;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input[type='date']::-webkit-date-and-time-value,
+  input[type='time']::-webkit-date-and-time-value,
+  input[type='datetime-local']::-webkit-date-and-time-value {
+    min-width: 0;
+    min-height: 1.5em;
+    text-align: left;
+  }
+
+  input[type='date']::-webkit-datetime-edit,
+  input[type='time']::-webkit-datetime-edit,
+  input[type='datetime-local']::-webkit-datetime-edit,
+  input[type='date']::-webkit-datetime-edit-fields-wrapper,
+  input[type='time']::-webkit-datetime-edit-fields-wrapper,
+  input[type='datetime-local']::-webkit-datetime-edit-fields-wrapper {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    padding: 0;
+  }
+
+  input[type='date']::-webkit-calendar-picker-indicator,
+  input[type='time']::-webkit-calendar-picker-indicator,
+  input[type='datetime-local']::-webkit-calendar-picker-indicator {
+    margin: 0 0 0 0.25rem;
+  }
+}
+
+@layer components {
+  /* Page content uses the full screen width (no cap), so large monitors are not left with empty
+     margins. Card grids add columns at 3xl/4xl; paragraphs keep their own max-width for reading. */
+  .site-shell {
+    @apply w-full px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+
+  /* Same side padding as .site-shell, without the width cap. The nav uses it on every
+     page so the logo and menu never move when switching pages. */
+  .site-gutter {
+    @apply w-full px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+
+  /* Shared form controls: sign-in, sign-up, password and contact forms */
+  .form-label {
+    @apply mb-1.5 block text-[13px] font-semibold text-[#334155];
+  }
+  /* 16px on phones: iOS Safari zooms the page into any field with smaller text */
+  .form-input {
+    @apply block w-full rounded-xl border border-[#E2E8F0] bg-white px-3.5 py-3 text-[16px] text-[#0A1024] sm:text-[15px] transition placeholder:text-[#94A3B8] hover:border-[#CBD5E1] focus:border-[#0066E4] focus:outline-none focus:ring-4 focus:ring-[#0066E4]/15;
+  }
+  .btn-primary {
+    @apply inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#0066E4] px-5 text-[15px] font-semibold text-white shadow-cm-button transition hover:bg-[#0057C8] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A1024] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .btn-secondary {
+    @apply inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full border border-[#CFE0F7] bg-white px-5 text-[15px] font-semibold text-cm-active transition hover:border-[#0066E4] hover:bg-[#F5F9FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0066E4] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .text-link {
+    @apply font-semibold text-cm-active underline-offset-2 hover:text-[#0057C8] hover:underline;
+  }
+  .form-divider {
+    @apply my-6 flex items-center gap-3 text-[12px] font-medium uppercase tracking-[0.08em] text-[#94A3B8] before:h-px before:flex-1 before:bg-[#E2E8F0] after:h-px after:flex-1 after:bg-[#E2E8F0];
+  }
+  .alert-error {
+    @apply rounded-xl border border-[#FECACA] bg-[#FEF2F2] px-3.5 py-3 text-[14px] leading-5 text-[#991B1B];
+  }
+  /* Community redesign: buttons and surfaces from design-references/…Dashboard.png */
+  .cm-btn-primary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-full bg-cm-primary font-semibold text-white shadow-cm-button transition hover:bg-cm-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cm-primary focus-visible:ring-offset-2;
+  }
+  .cm-btn-outline {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-full border border-[#CFE0F7] bg-white font-semibold text-cm-active shadow-[0_2px_8px_-4px_rgba(0,102,228,0.35)] transition hover:border-cm-primary hover:bg-[#F5F9FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cm-primary;
+  }
+  .cm-card {
+    @apply rounded-cm-lg border border-cm-line bg-white shadow-cm-panel;
+  }
+  .alert-success {
+    @apply rounded-xl border border-[#A7F3D0] bg-[#ECFDF5] px-3.5 py-3 text-[14px] leading-5 text-[#065F46];
+  }
+}
+
+@layer utilities {
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
